@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, render_template
 import sqlite3
 
 DATABASE = 'boynextdoordb.db'
@@ -33,7 +33,7 @@ def home():
         SELECT * FROM songs
         JOIN Album ON Album.albumID=songs.albumID;"""
     results = query_db(sql)
-    return str(results)
+    return render_template("layout.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
