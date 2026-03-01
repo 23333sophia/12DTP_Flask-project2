@@ -33,7 +33,12 @@ def home():
         SELECT * FROM songs
         JOIN Album ON Album.albumID=songs.albumID;"""
     results = query_db(sql)
-    return render_template("layout.html")
+    return render_template("home.html" ,results=results)
+
+@app.route("songs/<int : id>")
+def songs(id):
+    #just one song based on the id
+    pass
 
 if __name__ == "__main__":
     app.run(debug=True)
