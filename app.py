@@ -28,17 +28,23 @@ def query_db(query, args=(), one=False):
 
 @app.route("/")
 def home():
-    #home page
+    sql = "SELECT * FROM Album;"
+    albums = query_db(sql)
+    return render_template("home.html", albums=albums)
+
+@app.route("/songs/<int:id>")
+def songs(id):
     sql = """
         SELECT * FROM songs
-        JOIN Album ON Album.albumID=songs.albumID;"""
-    results = query_db(sql)
-    return render_template("home.html" ,results=results)
+        WHERE albumID = ?
+        ORDER BY songID;
+    """
+    songs = query_db(sql, [id])
 
-@app.route("songs/<int : id>")
-def songs(id):
-    #just one song based on the id
-    pass
+    album_sql = "SELECT * FROM Album WHERE albumID = ?"
+    album = query_db(album_sql, [id], one=True)
+
+    return render_template("songs.html", songs=songs, album=album)
 
 if __name__ == "__main__":
     app.run(debug=True)

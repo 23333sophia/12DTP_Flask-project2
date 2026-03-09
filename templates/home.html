@@ -1,4 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
-<!-- home page -->
+
+<div class="w3-row-padding">
+
+    {% for album in albums %}
+    <div class="w3-third w3-margin-bottom">
+        <div class="w3-card">
+            <a href="/songs/{{ album[0] }}">
+                <img src="{{ url_for('static', filename='images/' + album[3]) }}">
+            </a>
+            <div class="w3-container w3-center">
+                <p>{{ album[1] }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
 {% endblock %}

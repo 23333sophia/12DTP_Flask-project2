@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>{{ album[1] }}</h2>
+
+
+<div class="w3-container">
+
+    {% for song in songs %}
+    <div class="w3-card w3-margin-bottom">
+        <div class="w3-row">
+
+            <div class="w3-col s3">
+                <img src="{{ url_for('static', filename='images/' + song[5]) }}" class="song-img">
+            </div>
+
+            <div class="w3-col s9 w3-padding">
+                <h4>{{ song[2] }}</h4>
+                <p><b>Producer:</b> {{ song[3] }}</p>
+                <p><b>Writers:</b> {{ song[4] }}</p>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
